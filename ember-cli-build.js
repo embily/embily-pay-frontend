@@ -4,8 +4,17 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
+    sassOptions: {
+      extension: 'sass',
+    },
+    minifyCSS: {
+      options: { processImport: true },
+    },
   });
+
+  app.import('vendor/bignumber.min.js');
+  app.import('vendor/jquery-3.6.1.min.js');
+  app.import('vendor/intercom.js');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.

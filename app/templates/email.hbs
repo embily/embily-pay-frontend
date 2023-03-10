@@ -1,0 +1,103 @@
+{{page-title "Confirm Email"}}
+
+{{#if this.loading}}
+  <div class="loading">&nbsp;</div>
+{{/if}}
+<div class="inner">
+  <div class="content">
+    <form onsubmit="return false;">
+      {{#if this.error }}
+        <div class="row">
+          <div class="info error">
+            <p>
+              <center>
+                {{ this.error }}
+              </center>
+            </p>
+          </div>
+        </div>
+      {{/if}}
+        <div class="row">
+          <div class="info blue">
+            <div class="order-field">You pay {{this.invoicestr}}</div>
+            <div class="order-value" style="padding-top: 5px;"><span style="font-size: 20px;">{{this.invoice.amount_debit}}</span>&nbsp;&nbsp;{{this.invoice.debit_currency}}</div>
+            <div class="order-field" style="font-size: 10px;">Order ID: {{ this.invoice.uuid }}</div>
+          </div>
+        </div>
+      <p>Verify your email address</p>
+      <br/>
+      {{#if this.mailer.code_present}}
+        <div class="row">
+          <fieldset class="readonly">
+            <label>&nbsp;&nbsp;Email&nbsp;&nbsp;</label>
+            <Input id="emailInput" @type="email" title="Your Email" @value={{this.invoice.billing.email_pending}} required readonly/>
+          </fieldset>
+          {{#if this.email_error}}
+            <span class="error-message">{{this.email_error}}</span>
+          {{/if}}
+          <p>
+            <a onclick={{action "resetEmail"}}>Change email</a>
+          </p>
+        </div>
+      {{else}}
+        <div class="row">
+          <fieldset class='{{if this.email_error "error" ""}}'>
+            <label>&nbsp;&nbsp;Email&nbsp;&nbsp;</label>
+            <Input id="emailInput" @type="email" title="Your Email" @value={{this.invoice.billing.email_pending}} required/>
+          </fieldset>
+          {{#if this.email_error}}
+            <span class="error-message">{{this.email_error}}</span>
+          {{/if}}
+        </div>
+      {{/if}}
+
+      {{#if this.mailer.code_present}}
+        <p>We’ve sent a verification code. Please, enter it into form below:<br/><br/></p>
+      {{/if}}
+
+      {{#if this.mailer.code_present}}
+        <div class="row">
+          <div class="info notice blue">
+            <h1>Enter verification code</h1>
+            <div>
+              <div class="col-6-1">
+                <Input class="digit" id="code1Input" @type="number" lang="en-150" step="1" maxlength="1" inputmode="numeric"  pattern="[0-9]" title="" @value={{this.code1}} onfocus={{action "code1InputFocusIn"}} onblur={{action "code1InputFocusOut"}} onkeydown={{action "code1InputKeyDown"}} onpaste={{action "code1InputPaste"}} required/>
+              </div><div class="col-6-2">
+                <Input class="digit" id="code2Input" @type="number" lang="en-150" step="1" maxlength="1" inputmode="numeric"  pattern="[0-9]" title="" @value={{this.code2}} onfocus={{action "code2InputFocusIn"}} onblur={{action "code2InputFocusOut"}} onkeydown={{action "code2InputKeyDown"}} onpaste={{action "code2InputPaste"}} required/>
+              </div><div class="col-6-3">
+                <Input class="digit" id="code3Input" @type="number" lang="en-150" step="1" maxlength="1" inputmode="numeric"  pattern="[0-9]" title="" @value={{this.code3}} onfocus={{action "code3InputFocusIn"}} onblur={{action "code3InputFocusOut"}} onkeydown={{action "code3InputKeyDown"}} onpaste={{action "code3InputPaste"}} required/>
+              </div><div class="col-6-4">
+                <Input class="digit" id="code4Input" @type="number" lang="en-150" step="1" maxlength="1" inputmode="numeric"  pattern="[0-9]" title="" @value={{this.code4}} onfocus={{action "code4InputFocusIn"}} onblur={{action "code4InputFocusOut"}} onkeydown={{action "code4InputKeyDown"}} onpaste={{action "code4InputPaste"}} required/>
+              </div><div class="col-6-5">
+                <Input class="digit" id="code5Input" @type="number" lang="en-150" step="1" maxlength="1" inputmode="numeric"  pattern="[0-9]" title="" @value={{this.code5}} onfocus={{action "code5InputFocusIn"}} onblur={{action "code5InputFocusOut"}} onkeydown={{action "code5InputKeyDown"}} onpaste={{action "code5InputPaste"}} required/>
+              </div><div class="col-6-6">
+                <Input class="digit" id="code6Input" @type="number" lang="en-150" step="1" maxlength="1" inputmode="numeric"  pattern="[0-9]" title="" @value={{this.code6}} onfocus={{action "code6InputFocusIn"}} onblur={{action "code6InputFocusOut"}} onkeydown={{action "code6InputKeyDown"}} onpaste={{action "code6InputPaste"}} required/>
+              </div>
+            <div>
+              {{#if this.code_error}}
+                <span class="error-message">{{this.code_error}}</span>
+              {{/if}}
+            </div>
+          </div>
+          <div>
+            <br/>
+            <a onclick={{action "requestCode"}}>Resend verification code</a>
+          </div>
+          </div>
+        </div>
+      {{/if}}
+
+      <div class="submit">
+        <button onclick={{action "continue"}} type="submit">
+          {{#if this.loading}}
+            Loading
+          {{else}}
+            Continue
+          {{/if}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{outlet}}

@@ -1,7 +1,28 @@
-{{page-title "EmbilyPayFrontend"}}
+{{page-title 'Embily Pay Services'}}
 
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<content>
+  <header>
+    <center>
+      <img src="https://embily-public.s3.eu-west-1.amazonaws.com/images/embily-light.svg"/>
+    </center>
+  </header>
+  <div class="container">
+    {{outlet}}
+  </div>
+</content>
+<footer>
+  <div class="footer-content">
+    <div class="footer-menu-items">
+      <a target="_blank" href="https://embily-public.s3.eu-west-1.amazonaws.com/documents/swap/AML-KYC-policy.pdf" rel="noopener noreferrer">AML & KYC Policy</a>
+      &nbsp;&nbsp;&nbsp;
+      <a target="_blank" href="https://embily-public.s3.eu-west-1.amazonaws.com/documents/swap/cookie-policy.pdf" rel="noopener noreferrer">Cookies Policy</a>
+      &nbsp;&nbsp;&nbsp;
+      <a target="_blank" href="https://embily-public.s3.eu-west-1.amazonaws.com/documents/swap/privacy-policy.pdf" rel="noopener noreferrer">Privacy Policy</a>
+      &nbsp;&nbsp;&nbsp;
+      <a target="_blank" href="https://embily-public.s3.eu-west-1.amazonaws.com/documents/swap/terms-of-use.pdf" rel="noopener noreferrer">Terms of Use</a>
+    </div>
+    Embily is a fully licensed and regulated company in the EU, providing the leading fiat infrastructure and payment processing solution for most popular cryptocurrencies.<br/><br/>
+    Crypto exchanges services provided by btc2wire OÜ (Lic. FVT000024).<br/><br/>
+    Restrictions apply to the following regions and countries: Afghanistan, Bahamas, Benin, Central African Rep, Chad, Congo (Democratic Republic), Cote D'Ivoire, Cuba, Eritrea, Ghana, Guinea, Guinea Bissau, Haiti, Iran, Iraq, Korea (Democratic Republic), Kuwait, Lebanon, Liberia, Libya, Mali, Myanmar (Burma), Nicaragua, Northern Cyprus, Pakistan, Panama, Palestine, Qatar, Russian Federation, Somalia, South Sudan, Sudan, Syrian Arab Republic, Togo, Trinidad & Tobago, Uganda, USA, Venezuela, West Bank, Yemen, Zimbabwe, Crimea, Luhansk National Republic (LNR), Donetsk National Republic (DNR), Donetsk region, Lugansk region, Nagorno Karabakh, Kashmir, Gaza Strip, South Ossetia, Abkhazia.
+  </div>
+</footer>

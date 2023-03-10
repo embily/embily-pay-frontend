@@ -1,0 +1,98 @@
+{{page-title "Billing Information"}}
+
+{{#if this.loading}}
+  <div class="loading">&nbsp;</div>
+{{/if}}
+<div class="inner">
+  <div class="content">
+    <form onsubmit="return false;">
+      {{#if this.error }}
+        <div class="row">
+          <div class="info error">
+            <p>
+              <center>
+                {{ this.error }}
+              </center>
+            </p>
+          </div>
+        </div>
+      {{/if}}
+      <p>We need a billing address in order to process your payment.</p>
+      <br/>
+      <div class="row">
+        <fieldset class={{if this.errors.firstName "error" ""}}>
+          <label>&nbsp;&nbsp;First Name&nbsp;&nbsp;</label>
+          <Input id="billingFirstName" @type="text" title="First Name" @value={{this.billing.first_name}} onfocus={{action "billingFirstNameInputFocusIn"}} onblur={{action "billingFirstNameInputFocusOut"}} required/>
+        </fieldset>
+        {{#if this.errors.firstName}}
+          <span class="error-message">{{this.errors.firstName}}</span>
+        {{/if}}
+      </div>
+      <div class="row">
+        <fieldset class={{if this.errors.lastName "error" ""}}>
+          <label>&nbsp;&nbsp;Last Name&nbsp;&nbsp;</label>
+          <Input id="billingLastName" @type="text" title="Last Name" @value={{this.billing.last_name}} onfocus={{action "billingLastNameInputFocusIn"}} onblur={{action "billingLastNameInputFocusOut"}} required/>
+        </fieldset>
+        {{#if this.errors.lastName}}
+          <span class="error-message">{{this.errors.lastName}}</span>
+        {{/if}}
+      </div>
+      <div class="row">
+        <fieldset class={{if this.errors.address "error" ""}}>
+          <label>&nbsp;&nbsp;Address&nbsp;&nbsp;</label>
+          <Input id="billingAddress" @type="text" title="Billing Address" @value={{this.billing.address}} onfocus={{action "billingAddressInputFocusIn"}} onblur={{action "billingAddressInputFocusOut"}} required/>
+        </fieldset>
+        {{#if this.errors.address}}
+          <span class="error-message">{{this.errors.address}}</span>
+        {{/if}}
+      </div>
+      <div class="row">
+        <fieldset class={{if this.errors.city "error" ""}}>
+          <label>&nbsp;&nbsp;City&nbsp;&nbsp;</label>
+          <Input id="billingCity" @type="text" title="Billing City" @value={{this.billing.city}} onfocus={{action "billingCityInputFocusIn"}} onblur={{action "billingCityInputFocusOut"}} required/>
+        </fieldset>
+        {{#if this.errors.city}}
+          <span class="error-message">{{this.errors.city}}</span>
+        {{/if}}
+      </div>
+      <div class="row">
+        <fieldset class={{if this.errors.zip "error" ""}}>
+          <label>&nbsp;&nbsp;Postal Code&nbsp;&nbsp;</label>
+          <Input id="billingPostal" @type="text" title="Billing Postal Code" @value={{this.billing.zip}} onfocus={{action "billingPostalInputFocusIn"}} onblur={{action "billingPostalInputFocusOut"}} required/>
+        </fieldset>
+        {{#if this.errors.zip}}
+          <span class="error-message">{{this.errors.zip}}</span>
+        {{/if}}
+      </div>
+      <div class="row">
+        <fieldset class={{if this.errors.country "error" ""}}>
+          <label>&nbsp;&nbsp;Country&nbsp;&nbsp;</label>
+          <select id="billingCountry" onchange={{action "selectCountry" value="target.value"}} title="Billing Country" required>
+            <option value="" selected>-</option>
+            {{#each this.countries as |country|}}
+              {{#if (eq this.billing.country country.code)}}
+                <option value="{{country.code}}" selected>{{country.name}}</option>
+              {{else}}
+                <option value="{{country.code}}">{{country.name}}</option>
+              {{/if}}
+            {{/each}}
+          </select>
+        </fieldset>
+        {{#if this.errors.country}}
+          <span class="error-message">{{this.errors.country}}</span>
+        {{/if}}
+      </div>
+      <div class="submit">
+        <button onclick={{action "continue"}} type="submit">
+          {{#if this.loading}}
+            Loading
+          {{else}}
+            Continue
+          {{/if}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{outlet}}

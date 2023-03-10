@@ -4,8 +4,8 @@ module.exports = function (environment) {
   let ENV = {
     modulePrefix: 'embily-pay-frontend',
     environment,
-    rootURL: '/',
-    locationType: 'history',
+    rootURL: '',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -39,8 +39,14 @@ module.exports = function (environment) {
     ENV.APP.autoboot = false;
   }
 
+  ENV.backendURL = 'https://banking.embily.ngrok.io';
+
+  if (environment === 'staging') {
+    ENV.backendURL = 'https://staging.banking.embily.com';
+  }
+
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    ENV.backendURL = 'https://banking.embily.com';
   }
 
   return ENV;
