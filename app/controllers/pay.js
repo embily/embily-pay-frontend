@@ -127,7 +127,78 @@ export default class PayController extends Controller {
       if (err) {
         this.cardNumber_error = err;
       }
-      
+    },
+    cardExpirationMonthInputKeyDown: function(){
+      var ctx = this;
+      var el = event.target;
+      var key = event.keyCode || event.charCode;
+      if (event.ctrlKey || event.metaKey || key == 9) { return; }
+      if ((key >= 48 && key <= 57) || (key >= 96 && key <= 105) || (key == 8 || key == 46)) {
+        // 0-9 only
+      } else {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+      var selection = document.getSelection().toString();
+      if (el.value && el.value.length >= 2 && ((key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+        if (selection.length <= 0) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+      }
+      setTimeout(function(){
+        if (ctx.card.month){
+          if (parseInt(ctx.card.month) < 0) {
+            el.value = "01";
+            ctx.card.month = "01";
+          }
+          if (parseInt(ctx.card.month) > 12) {
+            el.value = "12";
+            ctx.card.month = "12";
+          }
+          if (ctx.card.month.length >= 2){
+            document.getElementById('cardExpirationYear').focus();
+          }
+        }
+      });
+    },
+    cardExpirationYearInputKeyDown: function(){
+      var ctx = this;
+      var el = event.target;
+      var key = event.keyCode || event.charCode;
+      if (event.ctrlKey || event.metaKey || key == 9) { return; }
+      if ((key >= 48 && key <= 57) || (key >= 96 && key <= 105) || (key == 8 || key == 46)) {
+        // 0-9 only
+      } else {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+      var selection = document.getSelection().toString();
+      if (el.value && el.value.length >= 2 && ((key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+        if (selection.length <= 0) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+      }
+      setTimeout(function(){
+        if (ctx.card.year){
+          if ((ctx.card.year.length >= 2) && (parseInt(ctx.card.year) < 23)) {
+            el.value = "23";
+            ctx.card.year = "23";
+          }
+          if ((ctx.card.year.length >= 2) && (parseInt(ctx.card.year) > 33)) {
+            el.value = "33";
+            ctx.card.year = "33";
+          }
+          if (ctx.card.year.length >= 2){
+            document.getElementById('cardCVV').focus();
+          }
+        }
+      });
     },
   };
 }
