@@ -38,6 +38,15 @@
         {{/if}}
       </div>
       <div class="row">
+        <fieldset class={{if this.errors.phone "error" ""}}>
+          <label>&nbsp;&nbsp;Phone&nbsp;&nbsp;</label>
+          <Input id="billingPhone" @type="text" title="Phone" @value={{this.billing.phone}} onfocus={{action "billingPhoneInputFocusIn"}} onblur={{action "billingPhoneInputFocusOut"}} required/>
+        </fieldset>
+        {{#if this.errors.phone}}
+          <span class="error-message">{{this.errors.phone}}</span>
+        {{/if}}
+      </div>
+      <div class="row">
         <fieldset class={{if this.errors.address "error" ""}}>
           <label>&nbsp;&nbsp;Address&nbsp;&nbsp;</label>
           <Input id="billingAddress" @type="text" title="Billing Address" @value={{this.billing.address}} onfocus={{action "billingAddressInputFocusIn"}} onblur={{action "billingAddressInputFocusOut"}} required/>
