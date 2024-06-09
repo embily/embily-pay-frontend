@@ -45,7 +45,8 @@ export default class PayController extends Controller {
           (!ctx.invoice.billing.zip) ||
           (!ctx.invoice.billing.email) ||
           (!ctx.invoice.billing.first_name) ||
-          (!ctx.invoice.billing.last_name)
+          (!ctx.invoice.billing.last_name) ||
+          (!ctx.invoice.billing.phone)
         ){
           ctx.router.transitionTo('billing', ctx.invoiceID);
         }
