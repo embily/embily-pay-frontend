@@ -46,7 +46,8 @@ export default class BillingController extends Controller {
           (ctx.billing.zip) &&
           (ctx.billing.email) &&
           (ctx.billing.first_name) &&
-          (ctx.billing.last_name)
+          (ctx.billing.last_name) &&
+          (ctx.billing.phone)
         ) {
           ctx.router.transitionTo('pay', ctx.invoiceID);
         }
@@ -65,6 +66,7 @@ export default class BillingController extends Controller {
   continue = async function(ctx){
     if (!ctx.billing.first_name){ ctx.focus('billingFirstName'); return }
     if (!ctx.billing.last_name){ ctx.focus('billingLastName'); return }
+    if (!ctx.billing.phone){ ctx.focus('billingPhone'); return }
     if (!ctx.billing.address){ ctx.focus('billingAddress'); return }
     if (!ctx.billing.city){ ctx.focus('billingCity'); return }
     if (!ctx.billing.zip){ ctx.focus('billingPostal'); return }
@@ -92,6 +94,8 @@ export default class BillingController extends Controller {
     continue: async function(){
       this.continue(this);
     },
+    billingPhoneInputFocusIn: function(){ this.billingPhoneInputFocused = true; },
+    billingPhoneInputFocusOut: function(){ this.billingPhoneInputFocused = false; },
     billingLastNameInputFocusIn: function(){ this.billingLastNameInputFocused = true; },
     billingLastNameInputFocusOut: function(){ this.billingLastNameInputFocused = false; },
     billingFirstNameInputFocusIn: function(){ this.billingFirstNameInputFocused = true; },
